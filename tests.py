@@ -53,6 +53,10 @@ class TestBash(unittest.TestCase):
         # Shouldn't find anything because we haven't piped it.
         self.assertEqual(str(b.bash('grep setup')), '')
 
+    def test_value_preserves_whitespace(self):
+        result = bash("printf '  hi  \n'").value()
+        self.assertEqual(result, '  hi  ')
+
     def test_timeout_works(self):
         if not bash_module.SUBPROCESS_HAS_TIMEOUT:
             raise unittest.SkipTest()

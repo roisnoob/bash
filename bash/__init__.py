@@ -55,6 +55,6 @@ class bash(object):
         return bool(self.value())
 
     def value(self):
-        if self.stdout:
-            return self.stdout.strip().decode(encoding='UTF-8')
+        if self.stdout is not None:
+            return self.stdout.decode(encoding='UTF-8').rstrip('\r\n')
         return ''
